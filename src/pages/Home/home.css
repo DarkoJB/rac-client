@@ -1,0 +1,235 @@
+/* Reset Base */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow-x: hidden;
+  background: var(--color-primary);
+}
+
+/* Hero */
+.hero {
+  width: 100%;
+  height: 85vh;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("/images/station-wagons-hero.webp") center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.hero-content {
+  color: var(--color-light);
+  max-width: 800px;
+  padding: 2rem;
+  animation: fadeInUp 1s ease forwards;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: var(--color-white);
+}
+
+.hero-content p {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.hero-button {
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+  padding: 0.75rem 2rem;
+  border-radius: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.hero-button:hover {
+  background-color: var(--color-secondary-dark);
+  transform: scale(1.05);
+}
+
+/* Features */
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  padding: 4rem 5%;
+  background-color: var(--color-white);
+}
+
+.feature-card {
+  text-align: center;
+  padding: 2rem;
+  background: var(--color-light);
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 48, 73, 0.1); /* subtle navy tone shadow */
+  transition: transform 0.3s ease;
+}
+
+.feature-card h3,
+.feature-card p {
+  color: var(--color-primary);
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+}
+
+.feature-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Featured Cars */
+.featured-cars {
+  padding: 4rem 5%;
+  background-color: var(--color-primary-light);
+
+  opacity: 0;
+  animation: fadeInUp 0.3s ease forwards;
+  animation-delay: 0.8s;
+  animation-fill-mode: forwards;
+}
+
+.featured-cars h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--color-primary-dark);
+}
+
+.car-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.car-card {
+  background: var(--color-white);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.car-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.car-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+img[alt="Audi A6 Avant"].car-image {
+  object-fit: scale-down;
+}
+
+.car-info {
+  padding: 1.5rem;
+}
+
+.car-info h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-primary);
+}
+
+.car-info span {
+  font-weight: normal;
+  color: var(--color-primary-dark);
+}
+
+.car-specs {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.view-button {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  padding: 0.5rem;
+  display: block;
+  text-align: center;
+  border-radius: 6px;
+  text-decoration: none;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.view-button:hover {
+  background-color: var(--color-primary-dark);
+  transform: scale(1.03);
+}
+
+/* CTA */
+.cta-section {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  text-align: center;
+  padding: 4rem 5%;
+
+  opacity: 0;
+  animation: fadeInUp 1s ease forwards;
+  animation-delay: 1.6s;
+  animation-fill-mode: forwards;
+}
+
+.cta-section h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.cta-button {
+  background-color: var(--color-secondary);
+  padding: 0.75rem 2rem;
+  color: var(--color-white);
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: var(--color-secondary-dark);
+  transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 2.2rem;
+  }
+
+  .features {
+    grid-template-columns: 1fr;
+  }
+
+  .car-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Landing Page Animations */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

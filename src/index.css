@@ -1,0 +1,64 @@
+:root {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  font-family: "Poppins", "Helvetica", "Arial", sans-serif;
+  line-height: 1.6;
+  font-weight: 400;
+
+  color-scheme: light dark;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Primary Colors */
+  --color-primary: #003049;
+  --color-primary-light: #669bbc;
+  --color-primary-dark: #001d2d;
+
+  /* Secondary Colors */
+  --color-secondary: #f77f00;
+  --color-secondary-light: #fcbf49;
+  --color-secondary-dark: #b95f00;
+
+  /* Backgrounds */
+  --color-light: #f1faee;
+  --color-white: #ffffff;
+
+  /* Neutrals */
+  --color-dark: #1d3557;
+  --color-gray: #a8dadc;
+
+  /* System Colors */
+  --color-error: #e63946;
+  --color-success: #06d6a0;
+  --color-warning: #f4a261;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  width: 100%;
+  font-family: inherit;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
