@@ -11,14 +11,14 @@ const navigationLinks = [
 
 const Navigation: FC = () => {
   const Logo = () => (
-    <div className="logo">
+    <Link to="/" className="logo">
       <img
         src="/images/logo.webp"
         alt="Rent a Caravan Logo"
         className="logo-image"
       />
       <span className="logo-text">Rent a Caravan</span>
-    </div>
+    </Link>
   );
 
   return (

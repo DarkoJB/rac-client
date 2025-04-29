@@ -2,9 +2,13 @@ import { FC, useEffect, useState } from "react";
 import "./dashboard.css";
 import axios from "axios";
 import { iCarModel } from "../../shared/interfaces";
+import CarsModel from "../../models/Cars";
+import useCars from "../../shared/useCars";
 
 const Dashboard: FC = () => {
-  const [cars, setCars] = useState<iCarModel[]>([]);
+  const [cars, setCars] = useState<iCarModel[]>(useCars());
+
+  const carsModel = new CarsModel();
   const [newCar, setNewCar] = useState({
     model: "",
     year: "",
@@ -16,22 +20,9 @@ const Dashboard: FC = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    fetchCars();
+    // const existingCars = useCars() ;
+    // setNewCar(existingCars);
   }, []);
-
-  const fetchCars = async () => {
-    try {
-      setIsLoading(true);
-      const response = await axios.get<iCarModel[]>(
-        `${import.meta.env.VITE_API}/api/cars`,
-      );
-      setCars(response.data);
-      setIsLoading(false);
-    } catch (err) {
-      setError("Failed to fetch cars.");
-      setIsLoading(false);
-    }
-  };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewCar({ ...newCar, [event.target.name]: event.target.value });

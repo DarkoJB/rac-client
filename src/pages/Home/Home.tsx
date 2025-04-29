@@ -1,42 +1,12 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./home.css";
+import useCars from "../../shared/useCars";
+import CarCard from "../../components/CarCard/CarCard";
 
 const Home: FC = () => {
-  const featuredCars = [
-    {
-      id: 1,
-      model: "Volvo V90",
-      price: 80,
-      seats: 5,
-      image: "/images/volvo-v90.webp",
-      year: 2022,
-    },
-    {
-      id: 2,
-      model: "VW Passat",
-      price: 65,
-      seats: 5,
-      image: "/images/vw-passat.webp",
-      year: 2021,
-    },
-    {
-      id: 3,
-      model: "Audi A6 Avant",
-      price: 90,
-      seats: 5,
-      image: "/images/audi-a6-avant.webp",
-      year: 2023,
-    },
-    {
-      id: 4,
-      model: "Mercedes E-Class Wagon",
-      price: 95,
-      seats: 5,
-      image: "/images/mercedes-eclass.webp",
-      year: 2023,
-    },
-  ];
+  useEffect(() => {}, []);
+  const cars = useCars(4);
 
   const Hero = () => (
     <section className="hero">
@@ -73,29 +43,10 @@ const Home: FC = () => {
   const FeaturedCars = () => {
     return (
       <section className="featured-cars">
-        <h2>Featured Vehicles</h2>
+        <h1>Featured Vehicles</h1>
         <div className="car-grid">
-          {featuredCars.map((car) => (
-            <div key={car.id} className="car-card">
-              <img
-                src={car.image}
-                alt={car.model}
-                className="car-image"
-                loading="lazy"
-              />
-              <div className="car-info">
-                <h3>
-                  {car.model} <span>({car.year})</span>
-                </h3>
-                <div className="car-specs">
-                  <span>{car.seats} seats</span>
-                  <span>${car.price}/day</span>
-                </div>
-                <Link to={`/cars/${car.id}`} className="view-button">
-                  View Details
-                </Link>
-              </div>
-            </div>
+          {cars.map((car) => (
+            <CarCard car={car} />
           ))}
         </div>
       </section>
@@ -103,7 +54,7 @@ const Home: FC = () => {
   };
 
   return (
-    <div className="home-container">
+    <div className="page-container">
       <Hero />
       {/* <Features /> */}
 

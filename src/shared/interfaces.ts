@@ -24,4 +24,5 @@ export interface iCarModel {
   seats: number;
   year: number;
   _id: string;
+  thumbnail: string;
 }

@@ -9,7 +9,7 @@
   font-weight: 400;
 
   color-scheme: light dark;
-
+  background: var(--color-dark);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -17,7 +17,8 @@
 
   /* Primary Colors */
   --color-primary: #003049;
-  --color-primary-light: #669bbc;
+  /* --color-primary-light: #669bbc; */
+  --color-primary-light: #003049;
   --color-primary-dark: #001d2d;
 
   /* Secondary Colors */
@@ -50,6 +51,17 @@ body {
 a {
   text-decoration: none;
 }
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
 
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
@@ -61,4 +73,12 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type="number"] {
   -moz-appearance: textfield;
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow-x: hidden;
+  background: var(--color-primary);
 }
