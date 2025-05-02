@@ -1,12 +1,19 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./home.css";
-import useCars from "../../shared/useCars";
+import useCars from "../../hooks/useCars";
 import CarCard from "../../components/CarCard/CarCard";
+import { iCarModel } from "../../shared/interfaces";
 
 const Home: FC = () => {
   useEffect(() => {}, []);
-  const cars = useCars(4);
+  const existingCars = useCars(4);
+
+  const [cars, setCars] = useState<iCarModel[]>([]);
+
+  useEffect(() => {
+    setCars(existingCars.cars);
+  }, [existingCars]);
 
   const Hero = () => (
     <section className="hero">

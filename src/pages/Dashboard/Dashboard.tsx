@@ -1,57 +1,103 @@
 import { FC, useEffect, useState } from "react";
 import "./dashboard.css";
-import axios from "axios";
-import { iCarModel } from "../../shared/interfaces";
-import CarsModel from "../../models/Cars";
-import useCars from "../../shared/useCars";
+import { AddCarForm, iCarModel } from "../../shared/interfaces";
+import CarsModel from "../../models/CarsModel";
+import { useForm } from "react-hook-form";
+import useCars from "../../hooks/useCars";
+import AdminCarCard from "../../components/AdminCarCard/AdminCarCard";
+import { IoIosCloseCircleOutline } from "react-icons/io";
 
 const Dashboard: FC = () => {
-  const [cars, setCars] = useState<iCarModel[]>(useCars());
-
+  const existingCars = useCars();
   const carsModel = new CarsModel();
-  const [newCar, setNewCar] = useState({
-    model: "",
-    year: "",
-    seats: "",
-    pricePerDay: "",
-    owner: "",
-  });
-  const [isLoading, setIsLoading] = useState(false);
+  const [cars, setCars] = useState<iCarModel[]>([]);
+
   const [error, setError] = useState("");
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+
+  const [previewImages, setPreviewImages] = useState<string[]>([]);
 
   useEffect(() => {
-    // const existingCars = useCars() ;
-    // setNewCar(existingCars);
-  }, []);
+    setCars(existingCars.cars);
+  }, [existingCars]);
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setNewCar({ ...newCar, [event.target.name]: event.target.value });
-  };
+  const {
+    register,
+    handleSubmit,
+    reset,
+    watch,
+    setValue,
+    formState: { errors },
+  } = useForm<AddCarForm>();
 
-  const handleAddCar = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const images = watch("images");
+
+  const onSubmit = async (data: AddCarForm) => {
     try {
-      const response = await axios.post<iCarModel>(
-        `${import.meta.env.VITE_API}/api/cars`,
-        {
-          model: newCar.model,
-          year: parseInt(newCar.year),
-          seats: parseInt(newCar.seats),
-          pricePerDay: parseFloat(newCar.pricePerDay),
-          owner: newCar.owner || undefined,
-        },
-      );
+      const response = await carsModel.addCar({
+        model: data.model,
+        year: data.year,
+        seats: data.seats,
+        pricePerDay: data.pricePerDay,
+        owner: data.owner,
+        images: data.images ? Array.from(data.images) : [],
+      });
 
-      setCars((prev) => [...prev, response.data]);
-      setNewCar({ model: "", year: "", seats: "", pricePerDay: "", owner: "" });
+      setCars((prev) => [...prev, response]);
+      reset();
+      setPreviewImages([]);
       setError("");
     } catch (err) {
       setError("Failed to add new car.");
     }
   };
 
+  useEffect(() => {
+    if (!images || images.length === 0) {
+      setSelectedFiles([]);
+      setPreviewImages([]);
+      return;
+    }
+
+    const files = Array.from(images);
+    const previews = files.map((file) => URL.createObjectURL(file));
+
+    setSelectedFiles(files);
+    setPreviewImages(previews);
+
+    return () => {
+      // Revoke object URLs to avoid memory leaks
+      previews.forEach((url) => URL.revokeObjectURL(url));
+    };
+  }, [images]);
+
+  const handleOpenImageUpload = (): void => {
+    document.getElementById("upload-images")?.click();
+  };
+
+  const handleRemoveImage = (indexToRemove: number) => {
+    const updatedFiles = selectedFiles.filter(
+      (_, index) => index !== indexToRemove,
+    );
+    const updatedPreviews = previewImages.filter(
+      (_, index) => index !== indexToRemove,
+    );
+
+    setSelectedFiles(updatedFiles);
+    setPreviewImages(updatedPreviews);
+
+    const dataTransfer = new DataTransfer();
+    updatedFiles.forEach((file) => dataTransfer.items.add(file));
+    setValue("images", dataTransfer.files); // Update hook form value
+  };
+
+  const handleDeleteCar = async (id?: string) => {
+    carsModel.deleteCar(id);
+    await existingCars.refreshCars();
+  };
+
   return (
-    <div className="dashboard-container">
+    <div className="page-container">
       <section className="dashboard-header">
         <h1>Dashboard</h1>
         <p>Manage your fleet easily</p>
@@ -59,46 +105,68 @@ const Dashboard: FC = () => {
 
       <section className="add-car-form">
         <h2>Add New Car</h2>
-        <form onSubmit={handleAddCar}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <input
             type="text"
-            name="model"
             placeholder="Model"
-            value={newCar.model}
-            onChange={handleInputChange}
-            required
+            {...register("model", { required: true })}
           />
           <input
             type="number"
-            name="year"
             placeholder="Year"
-            value={newCar.year}
-            onChange={handleInputChange}
-            required
+            {...register("year", { required: true })}
           />
           <input
             type="number"
-            name="seats"
             placeholder="Seats"
-            value={newCar.seats}
-            onChange={handleInputChange}
-            required
+            {...register("seats", { required: true })}
           />
           <input
             type="number"
-            name="pricePerDay"
+            step="0.01"
             placeholder="Price per day"
-            value={newCar.pricePerDay}
-            onChange={handleInputChange}
-            required
+            {...register("pricePerDay", { required: true })}
           />
           <input
             type="text"
-            name="owner"
             placeholder="Owner (optional)"
-            value={newCar.owner}
-            onChange={handleInputChange}
+            {...register("owner")}
           />
+          <div className="image-upload-section">
+            <div className="upload-input">
+              <button type="button" onClick={handleOpenImageUpload}>
+                Upload images
+              </button>
+              <input
+                id="upload-images"
+                type="file"
+                multiple
+                accept="image/*"
+                {...register("images")}
+                placeholder="Upload images"
+              />
+            </div>
+            <div className="image-preview-list">
+              {selectedFiles.map((file, index) => (
+                <div key={index} className="image-preview-item">
+                  <img
+                    src={previewImages[index]}
+                    alt={file.name}
+                    className="thumbnail"
+                  />
+                  <span className="filename">{file.name}</span>
+                  <button
+                    type="button"
+                    className="remove-button"
+                    onClick={() => handleRemoveImage(index)}
+                    aria-label={`Remove ${file.name}`}
+                  >
+                    <IoIosCloseCircleOutline size={20} />
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
           <button type="submit" className="submit-button">
             Add Car
           </button>
@@ -106,24 +174,22 @@ const Dashboard: FC = () => {
         {error && <p className="error-message">{error}</p>}
       </section>
 
-      <section className="car-list">
-        <h2>Existing Cars</h2>
-        {isLoading ? (
-          <p>Loading cars...</p>
-        ) : (
-          <div className="car-grid">
-            {cars.map((car) => (
-              <div key={car._id} className="car-card">
-                <h3>
-                  {car.model} ({car.year})
-                </h3>
-                <p>{car.seats} seats</p>
-                <p>${car.pricePerDay}/day</p>
-                {car.owner && <p className="owner-tag">Owner: {car.owner}</p>}
+      <section className="cars-list">
+        <div className="title-search-wrapper">
+          <h2>Existing Cars</h2>
+          <input type="text" placeholder="Search cars" />
+        </div>
+        <div className="car-grid">
+          {cars &&
+            cars.map((car, index) => (
+              <div key={index}>
+                <AdminCarCard
+                  car={car}
+                  handleDeleteCar={() => handleDeleteCar(car._id)}
+                />
               </div>
             ))}
-          </div>
-        )}
+        </div>
       </section>
     </div>
   );

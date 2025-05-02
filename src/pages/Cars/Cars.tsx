@@ -1,10 +1,18 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import "./cars.css";
-import useCars from "../../shared/useCars";
+import useCars from "../../hooks/useCars";
 import CarCard from "../../components/CarCard/CarCard";
+import { iCarModel } from "../../shared/interfaces";
 
 const Cars: FC = () => {
-  const cars = useCars();
+  const existingCars = useCars();
+
+  const [cars, setCars] = useState<iCarModel[]>([]);
+
+  useEffect(() => {
+    setCars(existingCars.cars);
+  }, [existingCars]);
+
   return (
     <div className="page-container">
       <section className="cars-hero">
@@ -17,8 +25,8 @@ const Cars: FC = () => {
       <section className="cars-list">
         <h2>Choose Your Wagon</h2>
         <div className="car-grid">
-          {cars.map((car) => (
-            <CarCard car={car} />
+          {cars.map((car, index) => (
+            <CarCard key={index} car={car} />
           ))}
         </div>
       </section>

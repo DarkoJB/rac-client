@@ -1,3 +1,5 @@
-import CarsModel from "./Cars";
+import CarsModel from "./CarsModel";
+import UsersModel from "./UsersModel";
 
-export default CarsModel;
+export { CarsModel };
+export { UsersModel };

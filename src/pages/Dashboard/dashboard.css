@@ -49,13 +49,81 @@
 }
 
 .add-car-form input {
-  flex: 1 1 200px;
+  flex: 1 1 20px;
   padding: 0.75rem;
   border: 1px solid var(--color-primary);
   background: var(--color-white);
   color: var(--color-primary);
   border-radius: 8px;
   font-size: 1rem;
+}
+
+.add-car-form .image-upload-section {
+  display: flex;
+  flex-flow: column;
+  width: 100%;
+}
+
+.image-preview-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 0;
+}
+
+.image-preview-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--color-primary-dark);
+  padding: 2px 10px;
+  border-radius: 6px;
+  background-color: #f8f8f8;
+  position: relative;
+}
+
+.thumbnail {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.filename {
+  flex-grow: 1;
+  font-size: 0.9rem;
+  color: #333;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.remove-button {
+  background: none;
+  border: none;
+  color: #c00;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-car-form .image-upload-section .upload-input button {
+  flex: 1 1 20px;
+  padding: 0.75rem;
+  border: 1px solid var(--color-primary);
+  background: var(--color-white);
+  color: var(--color-primary);
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  width: 150px;
+}
+
+.add-car-form .image-upload-section .upload-input input {
+  display: none;
 }
 
 .submit-button {
@@ -80,7 +148,28 @@
 }
 
 /* Car List */
-.car-list h2 {
+
+.cars-list {
+  padding: 4rem 5%;
+  background-color: var(--color-primary-light);
+  opacity: 0;
+  animation: fadeInUp 1s ease forwards;
+  animation-delay: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+.cars-list .title-search-wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cars-list .title-search-wrapper input {
+  flex: none;
+}
+
+.cars-list .title-search-wrapper h2 {
   text-align: center;
   margin-bottom: 2rem;
   color: var(--color-light);
@@ -88,26 +177,8 @@
 
 .car-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
-}
-
-.car-card {
-  background: var(--color-white);
-  padding: 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease;
-}
-
-.car-card:hover {
-  transform: translateY(-5px);
-}
-
-.owner-tag {
-  margin-top: 0.5rem;
-  font-style: italic;
-  color: var(--color-primary);
 }
 
 /* Animation */
