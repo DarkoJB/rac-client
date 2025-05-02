@@ -1,0 +1,49 @@
+.admin-car-card {
+  display: flex;
+  flex-flow: column;
+  place-items: center;
+}
+
+.admin-car-card .admin-panel {
+  background: var(--color-white);
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-evenly;
+  /* padding-bottom: 10px; */
+  border: 2px solid var(--color-dark);
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 5px;
+  width: 320px;
+}
+
+.admin-car-card .admin-panel h4 {
+  line-height: 1;
+  width: 100%;
+  place-self: center;
+  display: flex;
+  justify-content: end;
+  color: var(--color-dark);
+}
+
+.admin-car-card .admin-btns-wrapper {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+}
+
+.admin-car-card .admin-btns-wrapper > button {
+  border: 1px solid var(--color-dark);
+  border-radius: 10px;
+  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--color-white);
+  color: var(--color-dark);
+  padding: 5px;
+  cursor: pointer;
+}

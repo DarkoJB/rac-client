@@ -1,3 +1,5 @@
+export type ToastType = "success" | "error" | "warn" | "info";
+
 // Users
 
 export interface iUserModel {
@@ -16,13 +18,27 @@ export enum UserRoleType {
 
 // Cars
 
+export interface iCarsContextValue {
+  cars: iCarModel[];
+  refreshCars: (amount?: number) => Promise<void>;
+}
+
 export interface iCarModel {
-  images: Array<string>;
+  images?: Array<string>;
   model: string;
-  owner: iUserModel["_id"] | null;
+  owner?: { _id?: iUserModel["_id"]; username?: iUserModel["username"] } | null;
   pricePerDay: number;
   seats: number;
   year: number;
-  _id: string;
-  thumbnail: string;
+  _id?: string;
+  thumbnail?: string;
+}
+
+export interface AddCarForm {
+  model: string;
+  year: number;
+  seats: number;
+  pricePerDay: number;
+  owner?: string;
+  images?: FileList | File[];
 }

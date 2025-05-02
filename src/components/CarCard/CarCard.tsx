@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { iCarModel } from "../../shared/interfaces";
-import useApi from "../../shared/useApi";
+import useApi from "../../hooks/useApi";
 import { Link } from "react-router";
 import "./car-card.css";
 const CarCard: FC<{ car: iCarModel }> = ({ car }) => {
