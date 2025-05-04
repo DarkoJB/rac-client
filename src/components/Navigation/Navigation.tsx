@@ -1,6 +1,8 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./navigation.css";
+import { FaBars, FaTimes } from "react-icons/fa";
+import useSwipe from "../../hooks/useSwipe";
 
 const navigationLinks = [
   { path: "/", label: "Home" },
@@ -10,6 +12,30 @@ const navigationLinks = [
 ];
 
 const Navigation: FC = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    // Toggle body scroll based on menu state
+    if (isMenuOpen && window.innerWidth <= 768) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    // Cleanup function
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMenuOpen]);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const swipeHandlers = useSwipe({
+    onSwipedRight: toggleMenu,
+  });
+
   const Logo = () => (
     <Link to="/" className="logo">
       <img
@@ -24,12 +50,19 @@ const Navigation: FC = () => {
   return (
     <header className="navigation">
       <Logo />
-      <nav className="nav-links">
+      <button className="hamburger" onClick={toggleMenu} aria-label="Menu">
+        {isMenuOpen ? <FaTimes /> : <FaBars />}
+      </button>
+      <nav
+        {...swipeHandlers}
+        className={`nav-links ${isMenuOpen ? "active" : ""}`}
+      >
         {navigationLinks.map((link, index) => (
           <Link
             key={index}
             to={link.path}
             className={link.path === "/login" ? "nav-button" : "nav-link"}
+            onClick={toggleMenu}
           >
             {link.label}
           </Link>

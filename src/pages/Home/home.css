@@ -104,12 +104,6 @@
   color: var(--color-light);
 }
 
-.car-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-}
-
 /* CTA */
 .cta-section {
   background-color: var(--color-primary);
@@ -152,10 +146,6 @@
   }
 
   .features {
-    grid-template-columns: 1fr;
-  }
-
-  .car-grid {
     grid-template-columns: 1fr;
   }
 }

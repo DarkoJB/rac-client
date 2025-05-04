@@ -36,6 +36,21 @@
   color: var(--color-white);
 }
 
+/* Hamburger Menu */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--color-light);
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 101;
+}
+
+.hamburger:hover {
+  color: var(--color-white);
+}
+
 /* Navigation Links */
 .nav-links {
   display: flex;
@@ -91,35 +106,52 @@
   color: var(--color-white);
 }
 
-/* Mobile */
+/* Mobile Styles */
 @media (max-width: 768px) {
-  .navigation {
-    flex-direction: column;
-    padding: 1rem 2rem;
-    gap: 1rem;
+  .hamburger {
+    display: block;
   }
 
   .nav-links {
-    width: 100%;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 1rem;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    height: 100vh;
+    background-color: var(--color-dark);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+    transition: right 0.3s ease;
+    padding: 2rem;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .nav-links.active {
+    right: 0;
+  }
+
+  .nav-link {
+    font-size: 1.5rem;
+  }
+
+  .nav-link::after {
+    bottom: -8px;
+    height: 3px;
   }
 
   .nav-button {
-    margin-left: 0;
+    padding: 0.8rem 2rem;
+    font-size: 1.2rem;
   }
 }
 
 @media (max-width: 480px) {
   .nav-links {
-    flex-direction: column;
-    gap: 0.5rem;
+    width: 80%;
   }
 
-  .nav-link,
-  .nav-button {
-    font-size: 0.95rem;
-    padding: 0.5rem 1rem;
+  .logo-text {
+    font-size: 1.2rem;
   }
 }

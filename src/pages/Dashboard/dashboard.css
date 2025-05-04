@@ -165,22 +165,15 @@
   align-items: center;
 }
 
-.cars-list .title-search-wrapper input {
-  flex: none;
-}
-
 .cars-list .title-search-wrapper h2 {
   text-align: center;
   margin-bottom: 2rem;
   color: var(--color-light);
 }
 
-.car-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
+.cars-list .title-search-wrapper input {
+  flex: none;
 }
-
 /* Animation */
 @keyframes fadeInUp {
   0% {
@@ -197,5 +190,19 @@
 @media (max-width: 768px) {
   .add-car-form form {
     flex-direction: column;
+  }
+
+  .cars-list .title-search-wrapper {
+    flex-flow: column;
+    margin: 0.5rem 0;
+  }
+
+  .cars-list .title-search-wrapper h2 {
+    margin: 0;
+    margin-bottom: 1rem;
+  }
+
+  .cars-list .title-search-wrapper input {
+    width: 80%;
   }
 }

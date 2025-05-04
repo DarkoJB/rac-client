@@ -103,3 +103,16 @@ input {
   border-radius: 8px;
   font-size: 1rem;
 }
+
+.car-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .car-grid {
+    grid-template-columns: 1fr;
+    place-items: center;
+  }
+}

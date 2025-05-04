@@ -1,9 +1,3 @@
-.car-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-}
-
 .car-card {
   background: var(--color-white);
   border-radius: 12px;
