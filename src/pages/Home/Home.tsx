@@ -27,6 +27,7 @@ const Home: FC = () => {
     </section>
   );
 
+  // TODO: Rethink and redesign the Features section
   // const Features = () => (
   //   <section className="features">
   //     <div className="feature-card">
@@ -52,8 +53,8 @@ const Home: FC = () => {
       <section className="featured-cars">
         <h1>Featured Vehicles</h1>
         <div className="car-grid">
-          {cars.map((car) => (
-            <CarCard car={car} />
+          {cars.map((car, index) => (
+            <CarCard car={car} key={index} />
           ))}
         </div>
       </section>
@@ -64,9 +65,7 @@ const Home: FC = () => {
     <div className="page-container">
       <Hero />
       {/* <Features /> */}
-
       <FeaturedCars />
-
       <section className="cta-section">
         <h2>Adventure Awaits</h2>
         <Link to="/cars" className="cta-button">

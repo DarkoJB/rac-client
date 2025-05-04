@@ -5,15 +5,14 @@
 }
 
 .admin-car-card .admin-panel {
-  background: var(--color-white);
+  background: var(--color-primary-light);
   display: flex;
   align-items: center;
   width: 100%;
   justify-content: space-evenly;
-  /* padding-bottom: 10px; */
-  border: 2px solid var(--color-dark);
+  border: 2px solid var(--color-white);
   border-radius: 10px;
-  padding: 10px;
+  padding: 0 10px;
   margin-bottom: 5px;
   width: 320px;
 }
@@ -24,7 +23,7 @@
   place-self: center;
   display: flex;
   justify-content: end;
-  color: var(--color-dark);
+  color: var(--color-white);
 }
 
 .admin-car-card .admin-btns-wrapper {
@@ -46,4 +45,8 @@
   color: var(--color-dark);
   padding: 5px;
   cursor: pointer;
+}
+
+.admin-car-card .car-card:hover {
+  transform: none;
 }
