@@ -27,7 +27,7 @@ class CarsModel {
 
       // Append all image files
       if (newCar.images) {
-        Array.from(newCar.images).forEach((file, index) => {
+        Array.from(newCar.images).forEach((file) => {
           formData.append("images", file); // Use "images" to match your backend
         });
       }

@@ -21,14 +21,8 @@ const Dashboard: FC = () => {
     setCars(existingCars.cars);
   }, [existingCars]);
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    watch,
-    setValue,
-    formState: { errors },
-  } = useForm<AddCarForm>();
+  const { register, handleSubmit, reset, watch, setValue } =
+    useForm<AddCarForm>();
 
   const images = watch("images");
 
