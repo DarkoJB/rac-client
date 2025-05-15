@@ -14,7 +14,7 @@ const CarCard: FC<{ car: iCarModel }> = ({ car }) => {
         className="car-image"
         loading="lazy"
         onError={(event) => {
-          event.currentTarget.src = "/public/images/logo.webp";
+          event.currentTarget.src = "/images/logo.webp";
         }}
       />
       <div className="car-info">
