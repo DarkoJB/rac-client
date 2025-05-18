@@ -42,7 +42,7 @@ const CarsProvider: FC<{ children: ReactNode; amount?: number }> = ({
     <CarsContext.Provider
       value={{
         cars,
-        refreshCars: fetchCars,
+        refreshCars: (amount) => fetchCars(amount),
       }}
     >
       {children}

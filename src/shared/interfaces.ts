@@ -24,14 +24,19 @@ export interface iCarsContextValue {
 }
 
 export interface iCarModel {
-  images?: Array<string>;
+  images?: Array<iImage>;
   model: string;
   owner?: { _id?: iUserModel["_id"]; username?: iUserModel["username"] } | null;
   pricePerDay: number;
   seats: number;
   year: number;
   _id?: string;
-  thumbnail?: string;
+  thumbnail?: iImage;
+}
+
+interface iImage {
+  data: Buffer;
+  contentType: string;
 }
 
 export interface AddCarForm {
