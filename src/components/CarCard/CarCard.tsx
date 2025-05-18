@@ -1,15 +1,14 @@
 import { FC } from "react";
 import { iCarModel } from "../../shared/interfaces";
-import useApi from "../../hooks/useApi";
 import { Link } from "react-router";
 import "./car-card.css";
+import { toBase64 } from "../../utils/toBase64";
 const CarCard: FC<{ car: iCarModel }> = ({ car }) => {
-  const api = useApi();
-
+  const base64 = toBase64(car.thumbnail!.data);
   return (
     <div key={car._id} className="car-card">
       <img
-        src={api + car.thumbnail}
+        src={`data:${car.thumbnail?.contentType};base64,${base64}`}
         alt={car.model}
         className="car-image"
         loading="lazy"

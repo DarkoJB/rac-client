@@ -86,7 +86,7 @@ const Dashboard: FC = () => {
   };
 
   const handleDeleteCar = async (id?: string) => {
-    carsModel.deleteCar(id);
+    await carsModel.deleteCar(id);
     await existingCars.refreshCars();
   };
 
