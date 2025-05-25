@@ -5,6 +5,7 @@ import Loader from "./components/Loader/Loader.tsx";
 import Navigation from "./components/Navigation/Navigation.tsx";
 import CarsProvider from "./contexts/CarsContext.tsx";
 import ToastProvider from "./contexts/ToastContext.tsx";
+import LoaderProvider from "./contexts/LoaderContext.tsx";
 
 // Lazy-loaded components
 const Home = lazy(() => import("./pages/Home/Home.tsx"));
@@ -15,19 +16,21 @@ const NotFound = lazy(() => import("./pages/NotFound/NotFound.tsx"));
 function App() {
   return (
     <>
-      <ToastProvider>
-        <CarsProvider>
-          <Navigation />
-          <Suspense fallback={<Loader />}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/cars" element={<Cars />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Suspense>
-        </CarsProvider>
-      </ToastProvider>
+      <LoaderProvider>
+        <ToastProvider>
+          <CarsProvider>
+            <Navigation />
+            <Suspense fallback={<Loader />}>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/cars" element={<Cars />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Suspense>
+          </CarsProvider>
+        </ToastProvider>
+      </LoaderProvider>
     </>
   );
 }

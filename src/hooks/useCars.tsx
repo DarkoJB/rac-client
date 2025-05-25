@@ -1,21 +1,32 @@
 import { useContext, useEffect } from "react";
 import { iCarsContextValue } from "../shared/interfaces";
 import { CarsContext } from "../contexts/CarsContext";
+import { LoaderContext } from "../contexts/LoaderContext";
 
 const useCars = (amount?: number): iCarsContextValue => {
-  const context = useContext(CarsContext);
+  const carsContext = useContext(CarsContext);
+  const loader = useContext(LoaderContext);
 
-  if (!context) {
+  if (!carsContext) {
     throw new Error("useCars must be used withing a CarsProvider");
   }
 
   useEffect(() => {
-    if (amount !== undefined) {
-      context.refreshCars(amount);
-    }
+    const fetchCars = async () => {
+      if (amount !== undefined) {
+        try {
+          loader.setIsLoading(true);
+          await carsContext.refreshCars(amount);
+        } finally {
+          loader.setIsLoading(false);
+        }
+      }
+    };
+
+    fetchCars();
   }, [amount]);
 
-  return context;
+  return carsContext;
 };
 
 export default useCars;

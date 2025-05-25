@@ -49,3 +49,9 @@ export interface CarForm {
   images?: FileList | File[];
   retainImageIds?: string[];
 }
+
+// Utils
+export interface iLoaderContextValue {
+  isLoading: boolean;
+  setIsLoading: (loading: boolean) => void;
+}

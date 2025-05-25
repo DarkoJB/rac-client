@@ -1,17 +1,36 @@
-.loading {
-  padding: 2rem;
-  text-align: center;
-  animation: pulse 1.5s infinite;
+.car-loader-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  pointer-events: none;
 }
 
-@keyframes pulse {
+.car-loading {
+  width: 100px;
+  animation: driveAcross 4s ease-in-out infinite;
+  position: relative;
+  bottom: 120px;
+}
+
+@keyframes driveAcross {
   0% {
-    opacity: 0.5;
+    transform: translateX(-150%);
   }
-  50% {
-    opacity: 1;
+  40% {
+    transform: translateX(50vw);
+  }
+  60% {
+    transform: translateX(50vw);
   }
   100% {
-    opacity: 0.5;
+    transform: translateX(150vw);
   }
 }
