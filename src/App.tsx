@@ -10,6 +10,7 @@ import ToastProvider from "./contexts/ToastContext.tsx";
 const Home = lazy(() => import("./pages/Home/Home.tsx"));
 const Cars = lazy(() => import("./pages/Cars/Cars.tsx"));
 const Dashboard = lazy(() => import("./pages/Dashboard/Dashboard.tsx"));
+const NotFound = lazy(() => import("./pages/NotFound/NotFound.tsx"));
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/cars" element={<Cars />} />
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
         </CarsProvider>
