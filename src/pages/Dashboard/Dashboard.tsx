@@ -1,32 +1,42 @@
 import { FC, useEffect, useState } from "react";
 import "./dashboard.css";
-import { AddCarForm, iCarModel } from "../../shared/interfaces";
+import { CarForm, iCarModel } from "../../shared/interfaces";
 import CarsModel from "../../models/CarsModel";
 import { useForm } from "react-hook-form";
 import useCars from "../../hooks/useCars";
 import AdminCarCard from "../../components/AdminCarCard/AdminCarCard";
 import { IoIosCloseCircleOutline } from "react-icons/io";
+import EditCarPopup from "../../components/EditCarPopup/EditCarPopup";
+import { toast } from "../../utils/toast";
 
 const Dashboard: FC = () => {
   const existingCars = useCars();
   const carsModel = new CarsModel();
   const [cars, setCars] = useState<iCarModel[]>([]);
 
-  const [error, setError] = useState("");
+  const [generalError, setGeneralError] = useState("");
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
 
   const [previewImages, setPreviewImages] = useState<string[]>([]);
+
+  const [editCar, setEditCar] = useState<iCarModel | undefined>(undefined);
 
   useEffect(() => {
     setCars(existingCars.cars);
   }, [existingCars]);
 
-  const { register, handleSubmit, reset, watch, setValue } =
-    useForm<AddCarForm>();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    watch,
+    setValue,
+    formState: { errors: formErrors },
+  } = useForm<CarForm>();
 
   const images = watch("images");
 
-  const onSubmit = async (data: AddCarForm) => {
+  const onSubmit = async (data: CarForm) => {
     try {
       const response = await carsModel.addCar({
         model: data.model,
@@ -40,9 +50,11 @@ const Dashboard: FC = () => {
       setCars((prev) => [...prev, response]);
       reset();
       setPreviewImages([]);
-      setError("");
+      setGeneralError("");
     } catch (err) {
-      setError("Failed to add new car.");
+      const errorMessage = "Failed to add new car";
+      setGeneralError(errorMessage);
+      toast.error(errorMessage);
     }
   };
 
@@ -90,6 +102,23 @@ const Dashboard: FC = () => {
     await existingCars.refreshCars();
   };
 
+  const showEditCarPopup = (car: iCarModel) => setEditCar(car);
+  const hideEditCarPopup = () => setEditCar(undefined);
+
+  const handleUpdate = async (id: string, data: CarForm) => {
+    await carsModel.updateCar(id, {
+      model: data.model,
+      year: data.year,
+      seats: data.seats,
+      pricePerDay: data.pricePerDay,
+      owner: data.owner,
+      images: data.images ? Array.from(data.images) : [],
+      retainImageIds: data.retainImageIds,
+    });
+    await existingCars.refreshCars();
+    hideEditCarPopup();
+  };
+
   return (
     <div className="page-container">
       <section className="dashboard-header">
@@ -103,23 +132,23 @@ const Dashboard: FC = () => {
           <input
             type="text"
             placeholder="Model"
-            {...register("model", { required: true })}
+            {...register("model", { required: "Model is required" })}
           />
           <input
             type="number"
             placeholder="Year"
-            {...register("year", { required: true })}
+            {...register("year", { required: "Year is required" })}
           />
           <input
             type="number"
             placeholder="Seats"
-            {...register("seats", { required: true })}
+            {...register("seats", { required: "Number of seats is required" })}
           />
           <input
             type="number"
             step="0.01"
             placeholder="Price per day"
-            {...register("pricePerDay", { required: true })}
+            {...register("pricePerDay", { required: "Price is required" })}
           />
           <input
             type="text"
@@ -136,7 +165,9 @@ const Dashboard: FC = () => {
                 type="file"
                 multiple
                 accept="image/*"
-                {...register("images")}
+                {...register("images", {
+                  required: "At least one image is required",
+                })}
                 placeholder="Upload images"
               />
             </div>
@@ -146,12 +177,11 @@ const Dashboard: FC = () => {
                   <img
                     src={previewImages[index]}
                     alt={file.name}
-                    className="thumbnail"
+                    className="preview-image"
                   />
-                  <span className="filename">{file.name}</span>
                   <button
                     type="button"
-                    className="remove-button"
+                    className="remove-image-btn"
                     onClick={() => handleRemoveImage(index)}
                     aria-label={`Remove ${file.name}`}
                   >
@@ -165,7 +195,12 @@ const Dashboard: FC = () => {
             Add Car
           </button>
         </form>
-        {error && <p className="error-message">{error}</p>}
+        {generalError && <p className="error-message">{generalError}</p>}
+        {Object.values(formErrors).map((error, index) => (
+          <p key={index} className="error-message">
+            {error?.message}
+          </p>
+        ))}
       </section>
 
       <section className="cars-list">
@@ -180,11 +215,19 @@ const Dashboard: FC = () => {
                 <AdminCarCard
                   car={car}
                   handleDeleteCar={() => handleDeleteCar(car._id)}
+                  handleEditCar={() => showEditCarPopup(car)}
                 />
               </div>
             ))}
         </div>
       </section>
+      {editCar && (
+        <EditCarPopup
+          car={editCar}
+          hidePopup={hideEditCarPopup}
+          onUpdate={handleUpdate}
+        />
+      )}
     </div>
   );
 };

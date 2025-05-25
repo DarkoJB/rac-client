@@ -37,13 +37,15 @@ export interface iCarModel {
 interface iImage {
   data: Buffer;
   contentType: string;
+  _id?: string;
 }
 
-export interface AddCarForm {
+export interface CarForm {
   model: string;
   year: number;
   seats: number;
   pricePerDay: number;
   owner?: string;
   images?: FileList | File[];
+  retainImageIds?: string[];
 }

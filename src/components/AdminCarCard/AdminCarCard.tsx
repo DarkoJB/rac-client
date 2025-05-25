@@ -4,10 +4,11 @@ import { iCarModel } from "../../shared/interfaces";
 import "./admin-car-card.css";
 import { FaEdit, FaRegTrashAlt } from "react-icons/fa";
 
-const AdminCarCard: FC<{ car: iCarModel; handleDeleteCar: () => void }> = ({
-  car,
-  handleDeleteCar,
-}) => {
+const AdminCarCard: FC<{
+  car: iCarModel;
+  handleDeleteCar: () => void;
+  handleEditCar: () => void;
+}> = ({ car, handleDeleteCar, handleEditCar }) => {
   return (
     <div className="admin-car-card">
       <div className="admin-panel">
@@ -15,7 +16,7 @@ const AdminCarCard: FC<{ car: iCarModel; handleDeleteCar: () => void }> = ({
           <button name="delete" onClick={handleDeleteCar}>
             <FaRegTrashAlt />
           </button>
-          <button name="edit">
+          <button name="edit" onClick={handleEditCar}>
             <FaEdit />
           </button>
         </div>
