@@ -1,0 +1,9 @@
+.not-found-container {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.not-found-container button {
+  border: none;
+  cursor: pointer;
+}
