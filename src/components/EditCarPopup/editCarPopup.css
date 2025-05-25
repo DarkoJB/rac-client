@@ -1,0 +1,178 @@
+/* Edit Car Popup Styles */
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-form {
+  background: var(--color-white);
+  padding: 2rem;
+  width: 80%;
+  max-width: 600px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  animation: fadeInUp 0.8s ease forwards;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.popup-form h2 {
+  margin-bottom: 1.5rem;
+  color: var(--color-primary-dark);
+  text-align: center;
+}
+
+.popup-form form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.popup-form input[type="text"],
+.popup-form input[type="number"],
+.popup-form input[type="file"] {
+  flex: 1 1 20px;
+}
+
+.popup-form input[type="file"] {
+  display: none;
+}
+
+.upload-input button {
+  flex: 1 1 20px;
+  padding: 0.75rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: transparent !important;
+  background: var(--color-white);
+  color: var(--color-primary);
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  width: 150px;
+}
+
+.popup-overlay .image-preview-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 16px;
+  padding: 16px 0;
+  width: 100%;
+}
+
+.popup-overlay .image-preview-item {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  aspect-ratio: 1/1; /* Ensures square containers */
+}
+
+.popup-overlay .image-preview-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.popup-overlay .preview-image {
+  width: 100%;
+  height: 100%;
+  object-fit: scale-down;
+  display: block;
+}
+
+.popup-overlay .remove-image-btn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: rgba(255, 255, 255, 0.8);
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #ff4444;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(2px);
+}
+
+.popup-overlay .remove-image-btn:hover {
+  background: rgba(255, 255, 255, 0.9);
+  color: #cc0000;
+  transform: scale(1.1);
+}
+
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--color-primary);
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+  color: var(--color-primary-dark);
+}
+
+.popup-form button[type="submit"] {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  flex: 1 1 100%;
+  margin-top: 1rem;
+  font-size: 1rem;
+}
+
+.popup-form button[type="submit"]:hover {
+  background-color: var(--color-primary-dark);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .popup-form form {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 768px) {
+  .popup-form .image-preview-list {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .popup-form .image-preview-list {
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 8px;
+  }
+
+  .popup-form .remove-image-btn {
+    width: 24px;
+    height: 24px;
+    top: 4px;
+    right: 4px;
+  }
+}

@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import useToast from "../../hooks/useToast";
 import { ToastType } from "../../shared/interfaces";
 import "./toast-container.css";
@@ -9,9 +10,9 @@ const ToastContainer = () => {
     return `toast toast-${type}`;
   };
 
-  return (
-    <div className="toast-container">
-      {toasts.map((toast) => (
+  const toastElements = useMemo(
+    () =>
+      toasts.map((toast) => (
         <div
           key={toast.id}
           className={getToastClass(toast.type)}
@@ -29,9 +30,11 @@ const ToastContainer = () => {
             &times;
           </button>
         </div>
-      ))}
-    </div>
+      )),
+    [toasts, removeToast],
   );
+
+  return <div className="toast-container">{toastElements}</div>;
 };
 
 export default ToastContainer;

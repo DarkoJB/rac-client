@@ -50,12 +50,6 @@
 
 .add-car-form input {
   flex: 1 1 20px;
-  padding: 0.75rem;
-  border: 1px solid var(--color-primary);
-  background: var(--color-white);
-  color: var(--color-primary);
-  border-radius: 8px;
-  font-size: 1rem;
 }
 
 .add-car-form .image-upload-section {
@@ -64,50 +58,54 @@
   width: 100%;
 }
 
-.image-preview-list {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 10px 0;
+.add-car-form .image-preview-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 16px;
+  padding: 16px 0;
+  width: 100%;
 }
 
-.image-preview-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  border: 1px solid var(--color-primary-dark);
-  padding: 2px 10px;
-  border-radius: 6px;
-  background-color: #f8f8f8;
+.add-car-form .image-preview-item {
   position: relative;
-}
-
-.thumbnail {
-  width: 40px;
-  height: 40px;
-  object-fit: cover;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-}
-
-.filename {
-  flex-grow: 1;
-  font-size: 0.9rem;
-  color: #333;
+  border-radius: 8px;
   overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  aspect-ratio: 1/1; /* Ensures square containers */
 }
 
-.remove-button {
-  background: none;
+.add-car-form .preview-image {
+  width: 100%;
+  height: 100%;
+  object-fit: scale-down;
+  display: block;
+}
+
+.add-car-form .remove-image-btn {
+  position: absolute;
+  top: 1px;
+  right: 0px;
+  background: rgba(255, 255, 255, 0.8);
   border: none;
-  color: #c00;
-  cursor: pointer;
-  padding: 4px;
+  border-radius: 50%;
+  width: 35px;
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  color: var(--color-error);
+
+  transition: all 0.2s ease;
+  backdrop-filter: blur(2px);
+}
+
+.add-car-form .remove-image-btn:hover {
+  background: rgba(255, 255, 255, 0.9);
+  transform: scale(1.1);
 }
 
 .add-car-form .image-upload-section .upload-input button {
