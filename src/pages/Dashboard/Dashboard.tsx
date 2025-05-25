@@ -8,9 +8,11 @@ import AdminCarCard from "../../components/AdminCarCard/AdminCarCard";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import EditCarPopup from "../../components/EditCarPopup/EditCarPopup";
 import { toast } from "../../utils/toast";
+import useLoader from "../../hooks/useLoader";
 
 const Dashboard: FC = () => {
   const existingCars = useCars();
+  const loader = useLoader();
   const carsModel = new CarsModel();
   const [cars, setCars] = useState<iCarModel[]>([]);
 
@@ -38,6 +40,7 @@ const Dashboard: FC = () => {
 
   const onSubmit = async (data: CarForm) => {
     try {
+      loader(true);
       const response = await carsModel.addCar({
         model: data.model,
         year: data.year,
@@ -55,6 +58,8 @@ const Dashboard: FC = () => {
       const errorMessage = "Failed to add new car";
       setGeneralError(errorMessage);
       toast.error(errorMessage);
+    } finally {
+      loader(false);
     }
   };
 
@@ -98,14 +103,17 @@ const Dashboard: FC = () => {
   };
 
   const handleDeleteCar = async (id?: string) => {
+    loader(true);
     await carsModel.deleteCar(id);
     await existingCars.refreshCars();
+    loader(false);
   };
 
   const showEditCarPopup = (car: iCarModel) => setEditCar(car);
   const hideEditCarPopup = () => setEditCar(undefined);
 
   const handleUpdate = async (id: string, data: CarForm) => {
+    loader(true);
     await carsModel.updateCar(id, {
       model: data.model,
       year: data.year,
@@ -117,6 +125,7 @@ const Dashboard: FC = () => {
     });
     await existingCars.refreshCars();
     hideEditCarPopup();
+    loader(false);
   };
 
   return (
