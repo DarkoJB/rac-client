@@ -9,6 +9,7 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 import EditCarPopup from "../../components/EditCarPopup/EditCarPopup";
 import { toast } from "../../utils/toast";
 import useLoader from "../../hooks/useLoader";
+import SearchCars from "../../components/SearchCars/SearchCars";
 
 const Dashboard: FC = () => {
   const existingCars = useCars();
@@ -215,18 +216,17 @@ const Dashboard: FC = () => {
       <section className="cars-list">
         <div className="title-search-wrapper">
           <h2>Existing Cars</h2>
-          <input type="text" placeholder="Search cars" />
+          <SearchCars loader={loader} />
         </div>
         <div className="car-grid">
           {cars &&
             cars.map((car, index) => (
-              <div key={index}>
-                <AdminCarCard
-                  car={car}
-                  handleDeleteCar={() => handleDeleteCar(car._id)}
-                  handleEditCar={() => showEditCarPopup(car)}
-                />
-              </div>
+              <AdminCarCard
+                key={index}
+                car={car}
+                handleDeleteCar={() => handleDeleteCar(car._id)}
+                handleEditCar={() => showEditCarPopup(car)}
+              />
             ))}
         </div>
       </section>

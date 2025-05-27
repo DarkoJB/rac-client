@@ -3,9 +3,12 @@ import "./cars.css";
 import useCars from "../../hooks/useCars";
 import CarCard from "../../components/CarCard/CarCard";
 import { iCarModel } from "../../shared/interfaces";
+import SearchCars from "../../components/SearchCars/SearchCars";
+import useLoader from "../../hooks/useLoader";
 
 const Cars: FC = () => {
   const existingCars = useCars();
+  const loader = useLoader();
 
   const [cars, setCars] = useState<iCarModel[]>([]);
 
@@ -23,7 +26,10 @@ const Cars: FC = () => {
       </section>
 
       <section className="cars-list">
-        <h2>Choose Your Wagon</h2>
+        <div className="title-search-wrapper">
+          <h2>Choose Your Wagon</h2>
+          <SearchCars loader={loader} />
+        </div>
         <div className="car-grid">
           {cars.map((car, index) => (
             <CarCard key={index} car={car} />

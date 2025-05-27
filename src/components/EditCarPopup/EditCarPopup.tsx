@@ -153,9 +153,7 @@ const EditCarPopup: FC<EditCarPopupProps> = ({ car, hidePopup, onUpdate }) => {
               type="file"
               multiple
               accept="image/*"
-              {...register("images", {
-                required: "At least one image is required",
-              })}
+              {...register("images")}
               id="add-images"
             />
 

@@ -43,6 +43,7 @@ const CarsProvider: FC<{ children: ReactNode; amount?: number }> = ({
       value={{
         cars,
         refreshCars: (amount) => fetchCars(amount),
+        setCars,
       }}
     >
       {children}
