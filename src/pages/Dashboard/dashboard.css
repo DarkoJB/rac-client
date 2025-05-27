@@ -156,22 +156,6 @@
   animation-fill-mode: forwards;
 }
 
-.cars-list .title-search-wrapper {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.cars-list .title-search-wrapper h2 {
-  text-align: center;
-  margin-bottom: 2rem;
-  color: var(--color-light);
-}
-
-.cars-list .title-search-wrapper input {
-  flex: none;
-}
 /* Animation */
 @keyframes fadeInUp {
   0% {
@@ -186,21 +170,15 @@
 
 /* Responsive */
 @media (max-width: 768px) {
+  .add-car-form {
+    margin-bottom: 1rem;
+  }
+
   .add-car-form form {
     flex-direction: column;
   }
 
-  .cars-list .title-search-wrapper {
-    flex-flow: column;
-    margin: 0.5rem 0;
-  }
-
-  .cars-list .title-search-wrapper h2 {
-    margin: 0;
-    margin-bottom: 1rem;
-  }
-
-  .cars-list .title-search-wrapper input {
-    width: 80%;
+  .cars-list {
+    padding: 0.5rem 5%;
   }
 }

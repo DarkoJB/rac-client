@@ -97,6 +97,19 @@ class CarsModel {
       throw new Error(errorMessage);
     }
   };
+
+  searchCars = async (query?: string) => {
+    try {
+      const response = await axios.get<iCarModel[]>(
+        `${this.adminApi}/api/cars/search?cars=${query}`,
+      );
+      return response.data;
+    } catch (error) {
+      const errorMessage = "Error searching for cars";
+      console.error(errorMessage);
+      throw new Error(errorMessage);
+    }
+  };
 }
 
 export default CarsModel;

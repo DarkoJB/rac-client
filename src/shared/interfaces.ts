@@ -21,6 +21,7 @@ export enum UserRoleType {
 export interface iCarsContextValue {
   cars: iCarModel[];
   refreshCars: (amount?: number) => Promise<void>;
+  setCars: (cars: iCarModel[]) => void;
 }
 
 export interface iCarModel {
