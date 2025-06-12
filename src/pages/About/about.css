@@ -1,0 +1,123 @@
+.about-hero {
+  height: auto;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url("/images/station-wagons-hero.webp") center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.about-hero-content {
+  color: var(--color-light);
+  max-width: 800px;
+  padding: 2rem;
+  animation: fadeInUp 1s ease forwards;
+}
+
+.about-hero-content h1 {
+  font-size: 2.8rem;
+  margin-bottom: 1rem;
+  color: var(--color-white);
+}
+
+.about-hero-content p {
+  font-size: 1.2rem;
+  color: var(--color-light);
+}
+
+.about-section {
+  padding: 2rem 5%;
+  background-color: var(--color-primary-light);
+  color: var(--color-light);
+  animation: fadeInUp 1s ease forwards;
+  animation-delay: 0.4s;
+  animation-fill-mode: forwards;
+}
+
+.about-content {
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+.about-content h2 {
+  margin-top: 2rem;
+  font-size: 1.5rem;
+  color: var(--color-secondary-light);
+}
+
+.about-content ul {
+  list-style-type: none;
+  padding-left: 1rem;
+}
+
+.about-content ul li::before {
+  margin-right: 0.5rem;
+}
+
+.about-content ul.tech-stack li::before {
+  content: "🔹";
+}
+
+.about-content p {
+  margin-top: 0.5rem;
+  color: var(--color-light);
+}
+
+.contact-icon-row {
+  margin-top: 1.2rem;
+  display: flex;
+  gap: 1.5rem;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+.contact-icon-row a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-white);
+  padding: 0.8rem;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.contact-icon-row a:hover {
+  transform: scale(1.1);
+}
+
+.contact-icon-row img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  filter: brightness(0) saturate(100%); /* keeps icons crisp on light bg */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .about-hero-content h1 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .contact-icon-row {
+    gap: 1rem;
+    justify-content: flex-start;
+  }
+
+  .contact-icon-row a {
+    margin: 0 0.5rem;
+  }
+
+  .contact-icon-row img {
+    width: 24px;
+    height: 24px;
+  }
+}

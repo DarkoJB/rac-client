@@ -8,6 +8,7 @@ const navigationLinks = [
   { path: "/", label: "Home" },
   { path: "/cars", label: "Browse Cars" },
   { path: "/dashboard", label: "My Dashboard" },
+  { path: "/about", label: "About" },
   { path: "/login", label: "Sign In" },
 ];
 
