@@ -23,6 +23,9 @@ const Home: FC = () => {
         <Link to="/cars" className="hero-button">
           Explore Our Fleet
         </Link>
+        <Link to="/about" className="hero-button inverse">
+          Find out more
+        </Link>
       </div>
     </section>
   );

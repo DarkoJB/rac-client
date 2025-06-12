@@ -48,10 +48,25 @@
   transition:
     background-color 0.3s ease,
     transform 0.3s ease;
+  border: 2px solid transparent;
+  margin: 0 0.5rem;
+}
+
+.hero-button.inverse {
+  /* background-color: var(--color-white); */
+  background: transparent;
+  border: 2px solid var(--color-white);
+  color: var(--color-white);
 }
 
 .hero-button:hover {
   background-color: var(--color-secondary-dark);
+  transform: scale(1.05);
+}
+
+.hero-button.inverse:hover {
+  background: var(--color-white);
+  color: var(--color-primary);
   transform: scale(1.05);
 }
 
@@ -141,8 +156,16 @@
 
 /* Responsive */
 @media (max-width: 768px) {
+  .hero-content {
+    display: flex;
+    flex-flow: column;
+  }
   .hero-content h1 {
     font-size: 2.2rem;
+  }
+
+  .hero-button {
+    margin: 0.2rem 0;
   }
 
   .features {

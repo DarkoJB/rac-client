@@ -11,6 +11,7 @@ import LoaderProvider from "./contexts/LoaderContext.tsx";
 const Home = lazy(() => import("./pages/Home/Home.tsx"));
 const Cars = lazy(() => import("./pages/Cars/Cars.tsx"));
 const Dashboard = lazy(() => import("./pages/Dashboard/Dashboard.tsx"));
+const AboutPage = lazy(() => import("./pages/About/AboutPage.tsx"));
 const NotFound = lazy(() => import("./pages/NotFound/NotFound.tsx"));
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/cars" element={<Cars />} />
                 <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/about" element={<AboutPage />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>
