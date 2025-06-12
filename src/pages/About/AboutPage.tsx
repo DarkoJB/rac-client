@@ -85,7 +85,7 @@ const AboutPage: FC = () => {
       </section>
       <section className="about-section contact-section">
         <div className="about-content">
-          <h2>📬 You can check me out</h2>
+          <h2>📬 Check me out</h2>
           <div className="contact-icon-row">
             <a
               href="https://www.linkedin.com/in/darko-bozic/"
